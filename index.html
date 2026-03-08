@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense Approval Automation | Power Platform</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    line-height:1.6;
+    max-width:1000px;
+    margin:auto;
+    padding:40px;
+    background:#f5f7fa;
+    color:#333;
+}
+
+h1{
+    color:#0078D4;
+}
+
+h2{
+    color:#005a9e;
+    border-bottom:2px solid #e1e4e8;
+    padding-bottom:5px;
+}
+
+h3{
+    color:#333;
+}
+
+section{
+    background:white;
+    padding:25px;
+    margin-bottom:25px;
+    border-radius:8px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+}
+
+ul{
+    margin-top:10px;
+}
+
+.flow{
+    background:#eef4ff;
+    padding:15px;
+    border-left:5px solid #0078D4;
+    font-weight:bold;
+}
+
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#777;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Expense Approval Automation</h1>
+<p><strong>Technologies:</strong> Power Apps | Power Automate | SharePoint Online | Microsoft 365</p>
+
+<section>
+<h2>Problem Statement</h2>
+
+<p>Many organizations manage employee expense approvals through manual processes such as email submissions or paper forms. These methods create several operational challenges, including delayed approvals, lack of visibility into request status, difficulty tracking expenses, and inconsistent record keeping.</p>
+
+<p>The absence of a centralized system also increases the risk of lost documentation, unauthorized approvals, and poor financial accountability. Finance teams often struggle to maintain accurate records and generate timely reports.</p>
+
+<p>A digital, structured workflow was required to streamline expense submissions, enforce approval controls, and provide transparency for both employees and management.</p>
+</section>
+
+<section>
+<h2>Business Requirements</h2>
+
+<ul>
+<li>Provide a centralized platform for employees to submit expense requests.</li>
+<li>Capture key expense details including employee information, expense category, amount, description, and receipt attachments.</li>
+<li>Enable multi-stage approval workflow involving supervisors and finance personnel.</li>
+<li>Allow approvers to review, approve, or reject requests directly from email or Microsoft Teams.</li>
+<li>Maintain a complete audit trail of submissions, approvals, and comments.</li>
+<li>Provide real-time visibility into request status for employees.</li>
+<li>Store expense records securely for reporting and compliance purposes.</li>
+<li>Ensure the system enforces role-based access controls.</li>
+</ul>
+</section>
+
+<section>
+<h2>Solution Architecture</h2>
+
+<p>The solution was implemented using the Microsoft Power Platform integrated with SharePoint.</p>
+
+<h3>Power Apps</h3>
+<ul>
+<li>Serves as the user interface for employees to submit expense requests.</li>
+<li>Provides forms for entering expense details and uploading supporting documents.</li>
+<li>Displays submission history and approval status.</li>
+</ul>
+
+<h3>SharePoint Online</h3>
+<ul>
+<li>Acts as the centralized data repository.</li>
+<li>Stores expense requests in a structured SharePoint list.</li>
+<li>Stores uploaded receipts and attachments securely.</li>
+</ul>
+
+<h3>Power Automate</h3>
+<ul>
+<li>Manages the approval workflow and business logic.</li>
+<li>Sends approval requests to designated approvers.</li>
+<li>Updates request status based on approval outcomes.</li>
+<li>Sends notifications to employees and stakeholders.</li>
+</ul>
+
+<div class="flow">
+Architecture Flow: Employee → Power Apps (Expense Form) → SharePoint List → Power Automate Approval Flow → Status Updates → Notifications
+</div>
+
+</section>
+
+<section>
+<h2>Power Automate Logic (High-Level)</h2>
+
+<h3>Trigger</h3>
+<p>Flow triggers when a new expense request is created in the SharePoint list.</p>
+
+<h3>Data Validation</h3>
+<ul>
+<li>Validates submitted data fields.</li>
+<li>Ensures required information and attachments are present.</li>
+</ul>
+
+<h3>Manager Approval</h3>
+<ul>
+<li>Sends an approval request to the employee’s manager.</li>
+<li>Manager can approve or reject the request directly from email or the approval portal.</li>
+</ul>
+
+<h3>Finance Review</h3>
+<p>If approved by the manager, the request is forwarded to the finance team for verification.</p>
+
+<h3>Decision Handling</h3>
+<ul>
+<li>If approved, the expense status is updated to <strong>Approved</strong>.</li>
+<li>If rejected at any stage, the request status is updated to <strong>Rejected</strong> with comments.</li>
+</ul>
+
+<h3>Notification</h3>
+<p>Employee receives automated notification of the decision.</p>
+
+<h3>Record Update</h3>
+<p>SharePoint list item is updated with approval details, timestamps, and approver comments.</p>
+
+</section>
+
+<section>
+<h2>Security & Permissions</h2>
+
+<p>Security was implemented using Microsoft 365 role-based access control.</p>
+
+<h3>SharePoint Permissions</h3>
+<ul>
+<li>Employees can create and view their own requests.</li>
+<li>Managers can approve requests assigned to them.</li>
+<li>Finance team members have full review access.</li>
+</ul>
+
+<h3>Power Apps Controls</h3>
+<ul>
+<li>User interface restrictions prevent unauthorized data modification.</li>
+<li>Employees can only view records relevant to them.</li>
+</ul>
+
+<h3>Power Automate Controls</h3>
+<ul>
+<li>Approval routing ensures only designated approvers can make decisions.</li>
+</ul>
+
+<h3>Data Protection</h3>
+<ul>
+<li>All data remains within the organization's Microsoft 365 tenant.</li>
+<li>Access is protected by Microsoft Entra ID authentication.</li>
+</ul>
+
+</section>
+
+<section>
+<h2>Outcome / Benefits</h2>
+
+<h3>Improved Efficiency</h3>
+<ul>
+<li>Reduced manual processing and email exchanges.</li>
+<li>Faster approval turnaround times.</li>
+</ul>
+
+<h3>Greater Transparency</h3>
+<ul>
+<li>Employees can track request status in real time.</li>
+</ul>
+
+<h3>Improved Financial Control</h3>
+<ul>
+<li>Structured approval workflow ensures proper authorization.</li>
+</ul>
+
+<h3>Centralized Record Management</h3>
+<ul>
+<li>All expense records and supporting documents are stored in SharePoint for easy retrieval and auditing.</li>
+</ul>
+
+<h3>Scalability</h3>
+<ul>
+<li>The system can easily support additional approval stages, reporting integration, or Power BI dashboards.</li>
+</ul>
+
+</section>
+
+<div class="footer">
+<p>Power Platform Automation Portfolio</p>
+</div>
+
+</body>
+</html>
